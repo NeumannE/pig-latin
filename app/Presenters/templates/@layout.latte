@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="{webpack main.css}">
 </head>
 
-<body>
+<body class="bg-light">
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
 	{** main section of the page **}
