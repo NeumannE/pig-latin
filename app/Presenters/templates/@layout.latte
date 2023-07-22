@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	{** title **}
+	<title n:snippet="title">{ifset title}{include title|stripHtml} - {/ifset}Nette</title>
+
+	{** main css **}
+	<link rel="stylesheet" href="{webpack main.css}">
+</head>
+
+<body>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	{** main section of the page **}
+	<main n:snippet="content">
+			{include content}
+	</main>
+
+	{block scripts}
+		<script type="text/javascript">
+			const LOCALE = {$locale}
+		</script>
+		<script src="{webpack main.js}"></script>
+	{/block}
+</body>
+</html>

@@ -1,0 +1,46 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+extensions:
+    translation: Contributte\Translation\DI\TranslationExtension
+    webpack: Contributte\Webpack\DI\WebpackExtension(%debugMode%, %consoleMode%)
+
+webpack:
+	build:
+		directory: %wwwDir%/dist
+		publicPath: dist/
+
+	devServer:
+	    enabled: %debugMode% # default
+	    url: http://localhost:8080
+	    timeout: 0.1 # (seconds) default
+
+	manifest:
+	    name: manifest.json
+	    timeout: 0.5
+
+translation:
+	locales:
+		whitelist: [en, cs, sk]
+		default: en
+		fallback: [en]
+	dirs:
+		- %appDir%/Lang
+	returnOriginalMessage: true # to not translate undefined messages, default is true
+	localeResolvers:
+	    - Contributte\Translation\LocalesResolvers\Session
